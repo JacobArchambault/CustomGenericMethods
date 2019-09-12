@@ -19,6 +19,16 @@ namespace CustomGenericMethods
             Swap<string>(ref s1, ref s2);
             Console.WriteLine("After swap: {0} {1}!", s1, s2);
 
+            // Compiler will infer System.Boolean.
+            bool b1 = true, b2 = false;
+            Console.WriteLine("Before swap: {0}, {1}", b1, b2);
+            Swap(ref b1, ref b2);
+            Console.WriteLine("After swap: {0}, {1}", b1, b2);
+
+            // Must supply parameter if the method does not take params.
+            DisplayBaseClass<int>();
+            DisplayBaseClass<string>();
+
             Console.ReadLine();
         }
 
@@ -29,6 +39,11 @@ namespace CustomGenericMethods
                 T temp = a;
                 a = b;
                 b = temp;
+        }
+
+        static void DisplayBaseClass<T>()
+        {
+            Console.WriteLine("Base class of {0} is: {1}.", typeof(T), typeof(T).BaseType);
         }
     }
 }
